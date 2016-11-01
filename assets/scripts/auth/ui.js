@@ -16,6 +16,7 @@ const signUpSuccess = function(data)
   $('#sign-up-modal').modal('hide');
   $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!'></form>");
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#change-password-modal">Change Password</button>');
+  $('#account-menu').text(store.user.email.split('@')[0]+"'s Account");
 };
 
 const signInSuccess = function(data)
@@ -24,9 +25,9 @@ const signInSuccess = function(data)
   console.log(data);
   $('#messages').text('User signed in!');
   $('#sign-in-modal').modal('hide');
-  console.log($('#sign-in-button').text());
   $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!'></form>");
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#change-password-modal">Change Password</button>');
+  $('#account-menu').text(store.user.email.split('@')[0]+"'s Account");
 };
 
 const changePasswordSuccess = function(data)
@@ -42,6 +43,7 @@ const signOutSuccess = function()
   $('#messages').text('User signed out!');
   $('#sign-in-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#sign-in-modal">Sign In</button>');
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sign-up-modal">Sign Up</button>');
+  $('#account-menu').text('Sign up/in');
 }
 
 const failure = (error) => {
