@@ -42,7 +42,8 @@ const clickSpace = function (event) {
 }
 
 const onNewGame = function(event) {
-  let gameData  = gameLogic.newGame();
+  let gameData  = gameLogic.newGame(event.target.textContent);
+  console.log(event.target.textContent);
   event.preventDefault();
   api.createGame(gameData)
     .then(ui.createGameSuccess)
@@ -57,7 +58,8 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);
   $('.grid-space').on('click', clickSpace);
-  $('#new-game').on('click', onNewGame);
+  $('.new-game').on('click', onNewGame);
+  $('#new-game-buttons').hide();
 };
 
 module.exports = {

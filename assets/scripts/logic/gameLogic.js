@@ -10,7 +10,7 @@ let winner = "nobody";
 let turns = 1;
 let gameData = {};
 
-const newGame = function() {
+const newGame = function(gameType) {
   for(let i = 0; i < 9; i++) {
     $('#space'+i).attr('src', "./assets/images/blankSpace.png");
   }
@@ -27,9 +27,9 @@ const newGame = function() {
       email: store.user.email
     },
     player_o: {
-      email: "guest"
     }
   };
+  if(gameType === "Hot-Seat") {gameData.player_o.email = "guest";}
   return gameData;
 }
 
