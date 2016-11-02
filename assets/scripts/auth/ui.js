@@ -15,7 +15,7 @@ const signUpSuccess = function(data)
   $('#messages').text('New user signed up!');
   console.log(data);
   $('#sign-up-modal').modal('hide');
-  $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!'></form>");
+  $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!' class='btn btn-primary btn-lg'></form>");
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#change-password-modal">Change Password</button>');
   $('#account-menu').text(store.user.email.split('@')[0]+"'s Account");
   $('#new-game-buttons').show();
@@ -26,7 +26,7 @@ const signInSuccess = function(data)
   store.user = data.user;
   $('#messages').text('User signed in!');
   $('#sign-in-modal').modal('hide');
-  $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!'></form>");
+  $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!' class='btn btn-primary btn-lg'></form>");
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#change-password-modal">Change Password</button>');
   $('#account-menu').text(store.user.email.split('@')[0]+"'s Account");
   $('#new-game-buttons').show();
@@ -49,6 +49,21 @@ const signOutSuccess = function()
   $('#new-game-buttons').hide();
 }
 
+const turnSuccess = function()
+{
+
+}
+
+const getGameSuccess = function()
+{
+
+}
+
+const updateGameSuccess = function()
+{
+
+}
+
 const gameCreatedSuccess = function(data)
 {
   $('#messages').text('success');
@@ -68,4 +83,7 @@ module.exports = {
   changePasswordSuccess,
   signOutSuccess,
   gameCreatedSuccess,
+  turnSuccess,
+  getGameSuccess,
+  updateGameSuccess,
 };

@@ -37,10 +37,6 @@ const onSignOut = function (event) {
     .catch(ui.failure);
 };
 
-const clickSpace = function (event) {
-  gameLogic.turn(event.target.id.split('space')[1]);
-}
-
 const onNewGame = function(event) {
   let gameData  = gameLogic.newGame(event.target.textContent);
   console.log(event.target.textContent);
@@ -50,6 +46,21 @@ const onNewGame = function(event) {
     .catch(ui.failure);
 }
 
+const processTurn = function (event) {
+  let turnResult = gameLogic.turn(event.target.id.split('space')[1]);
+  console.log(turnResult);
+  event.preventDefault();
+  let currentGame = api.getGame()
+    .then(ui.getGameSuccess)
+    .catch(ui.failure);
+  console.log(currentGame);
+  /*
+  api.updateGame(data)
+    .then(ui.turnSuccess)
+    .catch(ui.failure);*/
+
+}
+
 
 
 const addHandlers = () => {
@@ -57,7 +68,7 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);
-  $('.grid-space').on('click', clickSpace);
+  $('.grid-space').on('click', processTurn);
   $('.new-game').on('click', onNewGame);
   $('#new-game-buttons').hide();
 };

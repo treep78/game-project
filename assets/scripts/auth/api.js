@@ -45,10 +45,31 @@ const signIn = (data) =>
     data,
   });
 
+  const getGame = (data) =>
+  $.ajax({
+    url: config.host+'/games/',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token='+store.user.token
+    },
+  });
+
+  const updateGame = (data) =>
+    $.ajax({
+    url: config.host+'/games/'+"id",
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token='+store.user.token
+    },
+    data,
+  });
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signOut,
   createGame,
+  getGame,
+  updateGame,
 };
