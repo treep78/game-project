@@ -46,6 +46,12 @@ const signOutSuccess = function()
   $('#account-menu').text('Sign up/in');
 }
 
+const gameCreatedSuccess = function(data)
+{
+  $('#messages').text('success');
+  console.log(data);
+}
+
 const failure = (error) => {
   console.error(error);
   $('#messages').text('failure');
@@ -58,4 +64,5 @@ module.exports = {
   signInSuccess,
   changePasswordSuccess,
   signOutSuccess,
+  gameCreatedSuccess,
 };

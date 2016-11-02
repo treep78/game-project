@@ -42,7 +42,11 @@ const clickSpace = function (event) {
 }
 
 const onNewGame = function(event) {
-  gameLogic.newGame();
+  let gameData  = gameLogic.newGame();
+  event.preventDefault();
+  api.createGame(gameData)
+    .then(ui.createGameSuccess)
+    .catch(ui.failure);
 }
 
 

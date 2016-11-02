@@ -1,12 +1,14 @@
 'use strict'
 
 //const events = require('../auth/events.js');
+const store = require('../store.js');
 
 let gameGrid = [];
 for(let i = 0; i<9; i++) {gameGrid.push(i+9)};
 let player = "x";
 let winner = "nobody";
 let turns = 1;
+let gameData = {};
 
 const newGame = function() {
   for(let i = 0; i < 9; i++) {
@@ -17,6 +19,18 @@ const newGame = function() {
   player = "x";
   winner = null;
   turns = 1;
+  gameData = {
+    cells: gameGrid,
+    over: false,
+    player_x: {
+      id: store.user.id,
+      email: store.user.email
+    },
+    player_o: {
+      email: "guest"
+    }
+  };
+  return gameData;
 }
 
 const checkWin = function() {
