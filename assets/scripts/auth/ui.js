@@ -1,6 +1,7 @@
 'use strict';
 
 const store = require('../store.js');
+const events = require('./events.js');
 
 const success = function(data)
 {
@@ -22,7 +23,6 @@ const signUpSuccess = function(data)
 const signInSuccess = function(data)
 {
   store.user = data.user;
-  console.log(data);
   $('#messages').text('User signed in!');
   $('#sign-in-modal').modal('hide');
   $('#sign-in-button').html("<form id='sign-out'><input type='submit' name='submit' value='Sign Out!'></form>");
