@@ -68,6 +68,7 @@ webpackJsonp([0],[
 	};
 
 	var onSignOut = function onSignOut(event) {
+	  console.log("Signing out!");
 	  event.preventDefault();
 	  api.signOut().then(ui.signOutSuccess).catch(ui.failure);
 	};
@@ -153,7 +154,7 @@ webpackJsonp([0],[
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
 	var config = __webpack_require__(6);
 	var store = __webpack_require__(7);
@@ -210,7 +211,7 @@ webpackJsonp([0],[
 	'use strict';
 
 	var config = {
-	    host: 'http://localhost:4741'
+	    host: 'https://aqueous-atoll-85096.herokuapp.com'
 	};
 
 	module.exports = config;
