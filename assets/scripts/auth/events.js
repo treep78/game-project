@@ -4,6 +4,7 @@ const getFormFields = require(`../../../lib/get-form-fields`);
 
 const api = require('./api');
 const ui = require('./ui');
+const gameLogic = require('../logic/gameLogic.js');
 
 const onSignUp = function (event)
 {
@@ -40,11 +41,22 @@ const onSignOut = function (event)
     .catch(ui.failure);
 };
 
+const clickSpace = function (event)
+{
+  gameLogic.turn(event.target.id.split('space')[1]);
+}
+
+const onNewGame = function(event)
+{
+  gameLogic.newGame();
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);
+  $('.grid-space').on('click', clickSpace);
+  $('#new-game').on('click', onNewGame);
 };
 
 module.exports = {
