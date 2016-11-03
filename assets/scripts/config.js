@@ -2,7 +2,7 @@
 
 const config =
 {
-    host: 'https://aqueous-atoll-85096.herokuapp.com:4147'
+    host: 'https://aqueous-atoll-85096.herokuapp.com'
 };
 
 module.exports = config;
