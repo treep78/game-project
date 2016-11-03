@@ -77,16 +77,19 @@ const processTurn = function (event) {
 
 const onForfeit = function(event)
 {
-  let gamePatch = {
-    game: {
-      over: true
+  if($('.forfeit').textContent == "Forfeit") {
+    let gamePatch = {
+      game: {
+        over: true
+      }
     }
+    event.preventDefault();
+    api.updateGame(gamePatch)
+      .then(ui.updateGameSuccess)
+      .catch(ui.failure);
+    gameLogic.winner = "player "+gameLogic.player+"forfeits";
   }
-  event.preventDefault();
-  api.updateGame(gamePatch)
-    .then(ui.updateGameSuccess)
-    .catch(ui.failure);
-  gameLogic.winner = "player "+gameLogic.player+"forfeits";
+
   $('.forfeit').hide();
   $('#new-game-buttons').show();
   store.gameInProgress = undefined;

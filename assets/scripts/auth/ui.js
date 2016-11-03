@@ -7,7 +7,6 @@ const gameLogic = require('../logic/gameLogic.js');
 const success = function(data)
 {
   $('#messages').text('success');
-  console.log(data);
 };
 
 const signUpSuccess = function(data)
@@ -30,7 +29,6 @@ const signInSuccess = function(data)
 
 const changePasswordSuccess = function(data)
 {
-  console.log(data);
   $('#messages').text('Password Changed!');
   $('#change-password-modal').modal('hide');
 };
@@ -58,7 +56,6 @@ const getGameSuccess = function(data)
 
 const updateGameSuccess = function(data)
 {
-  console.table(data);
 }
 
 const createGameSuccess = function(data)
@@ -69,15 +66,13 @@ const createGameSuccess = function(data)
 }
 
 const getGameIdSuccess = function (data) {
-  //console.table(data.games);
-  console.table(data.games);
   let gameId;
+  console.log(data);
   for(let i in data.games)
   {
-    if(store.user.id === data.games[i].player_x.id)
+    if(store.user.email === data.games[i].player_x.email)
     {
       store.sessionID = data.games[i].id;
-      console.log(store.sessionID);
     }
   }
   $('#session-id-display').text("Session ID: "+store.sessionID);
@@ -90,7 +85,6 @@ const loadGameSuccess = function (data) {
     store.gameInProgress = data;
     $('#session-id-display').text("Session ID: "+store.sessionID);
     store.gameInProgress.game.cells = data.game.cells;
-    console.log(store.gameInProgress)
     gameLogic.winner = null;
     let xVO = 0;
     for(let i in store.gameInProgress.game.cells)
@@ -101,8 +95,7 @@ const loadGameSuccess = function (data) {
         store.gameInProgress.game.cells[i] === "x" ? xVO += 1 : xVO -= 1;
       }
     }
-    xVO >= 0 ? gameLogic.player = "x" : gameLogic.player = "o";
-    console.log(store.gameInProgress.game.cells);
+    xVO <= 0 ? gameLogic.player = "x" : gameLogic.player = "o";
     createGameSuccess();
   }
 }

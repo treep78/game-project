@@ -18,7 +18,7 @@ const signIn = (data) =>
 
 const changePassword = (data) =>
   $.ajax({
-    url: config.host+'/change-password/'+data.id,
+    url: config.host+'/change-password/'+store.user.id,
     method: 'PATCH',
     data,
     headers: {
