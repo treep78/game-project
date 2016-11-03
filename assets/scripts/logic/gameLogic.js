@@ -20,17 +20,18 @@ const newGame = function(gameType) {
   winner = null;
   turns = 1;
   gameData = {
-    cells: gameGrid,
-    over: false,
-    player_x: {
-      id: store.user.id,
-      email: store.user.email
-    },
-    player_o: {}
+    game: {
+      cells: gameGrid,
+      over: false,
+      player_x: {
+        id: store.user.id,
+        email: store.user.email
+      },
+      player_o: {}
+    }
   };
-  if(gameType === "Hot-Seat") {gameData.player_o.email = "guest";}
+  if(gameType === "Hot-Seat") {gameData.game.player_o.email = "guest";}
   store.gameInProgress = gameData;
-  return gameData;
 }
 
 const checkWin = function() {
@@ -76,8 +77,9 @@ const turn = function(space) {
     checkWin();
     turns +=1;
   }
-  store.gameInProgress.cells = gameGrid;
-  store.gameInProgress.over = !!winner;
+  store.turn = turns;
+  store.gameInProgress.game.cells = gameGrid;
+  store.gameInProgress.game.over = !!winner;
 }
 
 module.exports = {

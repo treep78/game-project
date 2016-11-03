@@ -40,9 +40,9 @@ const onSignOut = function (event) {
 };
 
 const onNewGame = function(event) {
-  let gameData  = gameLogic.newGame(event.target.textContent);
+  gameLogic.newGame(event.target.textContent);
   event.preventDefault();
-  api.createGame(gameData)
+  api.createGame(store.gameInProgress)
     .then(ui.createGameSuccess)
     .catch(ui.failure);
   api.getGameId()
@@ -51,12 +51,20 @@ const onNewGame = function(event) {
 }
 
 const processTurn = function (event) {
-  let turnResult = gameLogic.turn(event.target.id.split('space')[1]);
+  let clickedSpace = event.target.id.split('space')[1]
+  gameLogic.turn(clickedSpace);
   event.preventDefault();
-  /*api.getGame()
-    .then(ui.getGameSuccess)
-    .catch(ui.failure);*/
-  api.updateGame(store.gameInProgress)
+  console.log(store.gameInProgress.game.cells);
+  let gamePatch = {
+    game: {
+      cell: {
+        index: clickedSpace,
+        value: store.gameInProgress.game.cells[clickedSpace]
+      },
+      over: store.gameInProgress.game.over
+    }
+  }
+  api.updateGame(gamePatch)
     .then(ui.updateGameSuccess)
     .catch(ui.failure);
 
