@@ -24,6 +24,7 @@ body {
   flex-wrap: wrap;
   order: 2;
   width: 60%;
+  max-height: 300;
   margin: 0 auto;
   justify-content: space-between;
 }
@@ -51,4 +52,9 @@ body {
   width: 18%;
   height: auto;
   border: 1px solid $black;
+}
+
+img {
+  width: 100%;
+  height: 100px;
 }
