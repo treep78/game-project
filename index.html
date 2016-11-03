@@ -51,9 +51,22 @@
         <!--NAVBAR ENDS HERE-->
       </div>
 
+      <br>
       <div id="new-game-buttons">
         <button type="button" name="button" class="new-game">Hot-Seat</button>
+        <form id="load-hotseat">
+          <button type="submit">Load Hotseat Game</button>
+          <input type="number" name="sessionId" placeholder="Session ID">
+        </form>
+        <button type="button" name="button" class="new-game">Host Game</button>
+
+        <form id="join-game">
+          <button type="button">Join Game</button>
+          <input type="number" name="session-id"  placeholder="Session ID">
+        </form>
       </div>
+      <button type="button" name="button" class="forfeit">Forfeit</button>
+      <br>
 
       <div class="main">
 
@@ -73,6 +86,8 @@
         <div id="player2Stats" class="player-2-stats">
         </div>
       </div>
+      <h1 id="session-id-display"></h1>
+      <h1 id="winner-text"></h1>
 
 
 

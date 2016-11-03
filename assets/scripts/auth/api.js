@@ -76,6 +76,16 @@ const updateGame = (data) =>
   data,
 });
 
+const loadGameSession = function (data) {
+  return $.ajax({
+    url: config.host+'/games/'+data.sessionId,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token='+store.user.token
+    },
+  });
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -85,4 +95,5 @@ module.exports = {
   getGame,
   updateGame,
   getGameId,
+  loadGameSession,
 };
