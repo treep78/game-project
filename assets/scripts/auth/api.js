@@ -56,16 +56,6 @@ const getGameId = function () {
   });
 }
 
-const getGame = function (data) {
-  return $.ajax({
-    url: config.host+'/games',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token='+store.user.token
-    },
-  });
-}
-
 const updateGame = (data) =>
   $.ajax({
   url: config.host+'/games/'+store.sessionID,
@@ -92,7 +82,6 @@ module.exports = {
   changePassword,
   signOut,
   createGame,
-  getGame,
   updateGame,
   getGameId,
   loadGameSession,

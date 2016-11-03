@@ -45,6 +45,7 @@ const onNewGame = function(event) {
   api.createGame(store.gameInProgress)
     .then(ui.createGameSuccess)
     .catch(ui.failure);
+  console.log("newGame!")
   api.getGameId()
     .then(ui.getGameIdSuccess)
     .catch(ui.failure);
@@ -102,6 +103,8 @@ const onLoadHotseat = function(event) {
     .then(ui.loadGameSuccess)
     .catch(ui.failure);
 }
+
+
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);

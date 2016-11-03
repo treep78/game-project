@@ -71,6 +71,37 @@ const checkWin = function() {
   }
 }
 
+const checkPastWins = function(data) {
+  let gameGrid = data;
+  for (let i = 1; i < 5; i++) {
+    if(i !== 2)
+    {
+      if(gameGrid[0] === gameGrid[0+i] && gameGrid[0] === gameGrid[0+(2*i)] && gameGrid[0]!= "") {
+        return gameGrid[0];
+      }
+      else if (gameGrid[8] === gameGrid[8-i] && gameGrid[8] === gameGrid[8-(2*i)] && gameGrid[8]!= "") {
+        return gameGrid[8];
+      }
+    }
+    if (gameGrid[4] === gameGrid[4+i] && gameGrid[4] === gameGrid[4-i] && gameGrid[4]!= "") {
+      return gameGrid[4];
+    }
+    else {
+      let letters = 0;
+      for(let i in gameGrid)
+      {
+        if(gameGrid[i] == 'x')
+        {
+          letters+= 1;
+        }
+      }
+      if(letters == 5) {
+          return "draw";
+      }
+    }
+  }
+}
+
 const turn = function(space) {
   let gameGrid = store.gameInProgress.game.cells;
   if(player === "x" && gameGrid[(space/1)] !== "o" && gameGrid[(space/1)] !== "x" && winner === null) {
@@ -95,4 +126,5 @@ const turn = function(space) {
 module.exports = {
   turn,
   newGame,
+  checkPastWins,
 }

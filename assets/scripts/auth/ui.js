@@ -25,6 +25,7 @@ const signInSuccess = function(data)
   $('#sign-up-button').html('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"data-target="#change-password-modal">Change Password</button>');
   $('#account-menu').text(store.user.email.split('@')[0]+"'s Account");
   $('#new-game-buttons').show();
+
 };
 
 const changePasswordSuccess = function(data)
@@ -49,9 +50,20 @@ const turnSuccess = function()
 
 }
 
-const getGameSuccess = function(data)
-{
-    //console.table(data.games);
+const getGameSuccess = function(data) {
+    console.log(data);
+    let games = [0,0]; //played, won
+    for(let i in data.games) {
+      games[0]+=1;
+      if(data.games[i].over)
+      {
+        if(gameLogic.checkWin(data.games[i].cells) === "x")
+        {
+          games[1] += 1;
+        }
+      }
+    }
+    $("#player-1-stats").text("Player: "+games[0]+"Won: "+games[1]);
 }
 
 const updateGameSuccess = function(data)
@@ -67,15 +79,23 @@ const createGameSuccess = function(data)
 
 const getGameIdSuccess = function (data) {
   let gameId;
+  let games = [0,0]; //played, won
   console.log(data);
-  for(let i in data.games)
-  {
-    if(store.user.email === data.games[i].player_x.email)
-    {
+  for(let i in data.games) {
+    games[0]+=1;
+    if(store.user.email === data.games[i].player_x.email) {
       store.sessionID = data.games[i].id;
+    }
+    if(data.games[i].over)
+    {
+      if(gameLogic.checkPastWins(data.games[i].cells) === "x")
+      {
+        games[1] += 1;
+      }
     }
   }
   $('#session-id-display').text("Session ID: "+store.sessionID);
+  $("#player-1-stats").text("Player: "+games[0]+"Won: "+games[1]);
 }
 
 const loadGameSuccess = function (data) {
