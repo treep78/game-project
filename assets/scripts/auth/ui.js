@@ -54,20 +54,32 @@ const turnSuccess = function()
 
 }
 
-const getGameSuccess = function()
+const getGameSuccess = function(data)
 {
-
+    //console.table(data.games);
 }
 
-const updateGameSuccess = function()
+const updateGameSuccess = function(data)
 {
-
+  console.table(data);
 }
 
 const gameCreatedSuccess = function(data)
 {
-  $('#messages').text('success');
-  console.log(data);
+}
+
+const getGameIdSuccess = function (data) {
+  //console.table(data.games);
+  console.table(data.games);
+  let gameId;
+  for(let i in data.games)
+  {
+    if(store.user.id === data.games[i].player_x.id)
+    {
+      store.sessionID = data.games[i].id;
+      console.log(store.sessionID);
+    }
+  }
 }
 
 const failure = (error) => {
@@ -86,4 +98,5 @@ module.exports = {
   turnSuccess,
   getGameSuccess,
   updateGameSuccess,
+  getGameIdSuccess,
 };

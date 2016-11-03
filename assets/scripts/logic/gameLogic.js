@@ -29,6 +29,7 @@ const newGame = function(gameType) {
     player_o: {}
   };
   if(gameType === "Hot-Seat") {gameData.player_o.email = "guest";}
+  store.gameInProgress = gameData;
   return gameData;
 }
 
@@ -75,7 +76,8 @@ const turn = function(space) {
     checkWin();
     turns +=1;
   }
-  return [gameGrid, !!winner];
+  store.gameInProgress.cells = gameGrid;
+  store.gameInProgress.over = !!winner;
 }
 
 module.exports = {

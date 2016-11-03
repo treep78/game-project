@@ -16,53 +16,65 @@ const signIn = (data) =>
     data,
   });
 
-  const changePassword = (data) =>
-    $.ajax({
-      url: config.host+'/change-password/'+data.id,
-      method: 'PATCH',
-      data,
-      headers: {
-        Authorization: 'Token token='+store.user.token,
-      }
-    });
+const changePassword = (data) =>
+  $.ajax({
+    url: config.host+'/change-password/'+data.id,
+    method: 'PATCH',
+    data,
+    headers: {
+      Authorization: 'Token token='+store.user.token,
+    }
+  });
 
-  const signOut = () =>
-    $.ajax({
-      url: config.host+'/sign-out/'+store.user.id,
-      method: 'DELETE',
-      headers: {
-        Authorization: 'Token token='+store.user.token
-      },
-    });
-
-  const createGame = (data) =>
-    $.ajax({
-    url: config.host+'/games',
-    method: 'POST',
+const signOut = () =>
+  $.ajax({
+    url: config.host+'/sign-out/'+store.user.id,
+    method: 'DELETE',
     headers: {
       Authorization: 'Token token='+store.user.token
     },
-    data,
   });
 
-  const getGame = (data) =>
-  $.ajax({
-    url: config.host+'/games/',
+const createGame = function (data) {
+  return $.ajax({
+  url: config.host+'/games',
+  method: 'POST',
+  headers: {
+    Authorization: 'Token token='+store.user.token
+  },
+  data,
+});
+}
+
+const getGameId = function () {
+  return $.ajax({
+    url: config.host+'/games',
     method: 'GET',
     headers: {
       Authorization: 'Token token='+store.user.token
     },
   });
+}
 
-  const updateGame = (data) =>
-    $.ajax({
-    url: config.host+'/games/'+"id",
-    method: 'PATCH',
+const getGame = function (data) {
+  return $.ajax({
+    url: config.host+'/games',
+    method: 'GET',
     headers: {
       Authorization: 'Token token='+store.user.token
     },
-    data,
   });
+}
+
+const updateGame = (data) =>
+  $.ajax({
+  url: config.host+'/games/'+store.sessionID,
+  method: 'PATCH',
+  headers: {
+    Authorization: 'Token token='+store.user.token
+  },
+  data,
+});
 
 module.exports = {
   signUp,
@@ -72,4 +84,5 @@ module.exports = {
   createGame,
   getGame,
   updateGame,
+  getGameId,
 };

@@ -5,6 +5,8 @@ const getFormFields = require(`../../../lib/get-form-fields`);
 const api = require('./api');
 const ui = require('./ui');
 const gameLogic = require('../logic/gameLogic.js');
+const store = require('../store.js');
+
 
 const onSignUp = function (event) {
   let data = getFormFields(this);
@@ -39,25 +41,24 @@ const onSignOut = function (event) {
 
 const onNewGame = function(event) {
   let gameData  = gameLogic.newGame(event.target.textContent);
-  console.log(event.target.textContent);
   event.preventDefault();
   api.createGame(gameData)
     .then(ui.createGameSuccess)
+    .catch(ui.failure);
+  api.getGameId()
+    .then(ui.getGameIdSuccess)
     .catch(ui.failure);
 }
 
 const processTurn = function (event) {
   let turnResult = gameLogic.turn(event.target.id.split('space')[1]);
-  console.log(turnResult);
   event.preventDefault();
-  let currentGame = api.getGame()
+  /*api.getGame()
     .then(ui.getGameSuccess)
-    .catch(ui.failure);
-  console.log(currentGame);
-  /*
-  api.updateGame(data)
-    .then(ui.turnSuccess)
     .catch(ui.failure);*/
+  api.updateGame(store.gameInProgress)
+    .then(ui.updateGameSuccess)
+    .catch(ui.failure);
 
 }
 
