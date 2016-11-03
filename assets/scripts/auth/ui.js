@@ -3,6 +3,7 @@
 const store = require('../store.js');
 const events = require('./events.js');
 const gameLogic = require('../logic/gameLogic.js');
+const api = require('./api.js');
 
 const success = function(data)
 {
@@ -75,6 +76,7 @@ const createGameSuccess = function(data)
   $('#new-game-buttons').hide();
   $('.forfeit').show();
   $('#winner-text').text("");
+
 }
 
 const getGameIdSuccess = function (data) {
