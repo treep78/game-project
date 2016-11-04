@@ -32,7 +32,6 @@ const onChangePassword = function (event) {
     .catch(ui.failure);
 };
 
-
 const onSignOut = function (event) {
   event.preventDefault();
   api.signOut()
@@ -85,6 +84,7 @@ const onForfeit = function(event)
         over: true
       }
     }
+    console.log('working');
     event.preventDefault();
     api.updateGame(gamePatch)
       .then(ui.updateGameSuccess)
