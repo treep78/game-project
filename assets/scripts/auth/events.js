@@ -85,6 +85,7 @@ const onForfeit = function(event)
         over: true
       }
     }
+    console.log("working");
     event.preventDefault();
     api.updateGame(gamePatch)
       .then(ui.updateGameSuccess)
