@@ -85,7 +85,8 @@ const getGameIdSuccess = function (data) {
   let games = [0,0]; //played, won
   console.log(data);
   store.sessionID = 0;
-  for(let i in data.games) {
+  let i;
+  for(i in data.games) {
     games[0] += 1;
     if(store.user.email === data.games[i].player_x.email && data.games[i].id > store.sessionID) {
       store.sessionID = data.games[i].id;
