@@ -123,8 +123,15 @@ const turn = function(space) {
   store.gameInProgress.game.over = !!winner;
 }
 
+const clearBoard = function () {
+  for (let i = 0; i < 9; i++) {
+    $("#space"+i).attr('src', './assets/images/blankSpace.png');
+  }
+}
+
 module.exports = {
   turn,
   newGame,
   checkPastWins,
+  clearBoard,
 }

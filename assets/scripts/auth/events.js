@@ -72,6 +72,7 @@ const processTurn = function (event) {
       $('.forfeit').hide();
       $('.saveQuit').hide();
       $('#new-game-buttons').show();
+      //gameLogic.clearBoard();
       store.gameInProgress = undefined;
     }
   }
@@ -93,6 +94,7 @@ const onForfeit = function(event)
   $('.forfeit').hide();
   $('.saveQuit').hide();
   $('#new-game-buttons').show();
+  gameLogic.clearBoard();
   store.gameInProgress = undefined;
 }
 
@@ -103,6 +105,7 @@ const onSaveQuit = function(event)
   $('.forfeit').hide();
   $('.saveQuit').hide();
   $('#new-game-buttons').show();
+  gameLogic.clearBoard();
   store.gameInProgress = undefined;
 }
 
@@ -125,7 +128,7 @@ const addHandlers = () => {
   $('.new-game').on('click', onNewGame);
   $('.forfeit').on('click', onForfeit);
   $('.saveQuit').on('click', onSaveQuit);
-  $('#load-hotseat').on('click', onLoadHotseat);
+  $('#load-hotseat').on('submit', onLoadHotseat);
   $('#new-game-buttons').hide();
   $('.forfeit').hide();
   $('.saveQuit').hide();
