@@ -64,7 +64,7 @@ const getGameSuccess = function(data) {
         }
       }
     }
-    $("#player-1-stats").text("Player: "+games[0]+"Won: "+games[1]);
+    $("#player-1-stats").text("Played: "+games[0]+" Won: "+games[1]);
 }
 
 const updateGameSuccess = function(data)
@@ -75,6 +75,7 @@ const createGameSuccess = function(data)
 {
   $('#new-game-buttons').hide();
   $('.forfeit').show();
+  $('.saveQuit').show();
   $('#winner-text').text("");
 
 }

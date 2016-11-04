@@ -78,21 +78,29 @@ const processTurn = function (event) {
 
 const onForfeit = function(event)
 {
-  if($('.forfeit').textContent == "Forfeit") {
-    let gamePatch = {
-      game: {
-        over: true
-      }
+  let gamePatch = {
+    game: {
+      over: true
     }
-    console.log("working");
-    event.preventDefault();
-    api.updateGame(gamePatch)
-      .then(ui.updateGameSuccess)
-      .catch(ui.failure);
-    gameLogic.winner = "player "+gameLogic.player+"forfeits";
-  }
+  };
+  event.preventDefault();
+  api.updateGame(gamePatch)
+    .then(ui.updateGameSuccess)
+    .catch(ui.failure);
+  gameLogic.winner = "player "+gameLogic.player+"forfeits";
 
   $('.forfeit').hide();
+  $('.saveQuit').hide();
+  $('#new-game-buttons').show();
+  store.gameInProgress = undefined;
+}
+
+const onSaveQuit = function(event)
+{
+  event.preventDefault();
+
+  $('.forfeit').hide();
+  $('.saveQuit').hide();
   $('#new-game-buttons').show();
   store.gameInProgress = undefined;
 }
@@ -115,9 +123,11 @@ const addHandlers = () => {
   $('.grid-space').on('click', processTurn);
   $('.new-game').on('click', onNewGame);
   $('.forfeit').on('click', onForfeit);
+  $('.saveQuit').on('click', onSaveQuit);
   $('#load-hotseat').on('click', onLoadHotseat);
   $('#new-game-buttons').hide();
   $('.forfeit').hide();
+  $('.saveQuit').hide();
 };
 
 module.exports = {
