@@ -101,6 +101,7 @@ webpackJsonp([0],[
 	      $('.forfeit').hide();
 	      $('.saveQuit').hide();
 	      $('#new-game-buttons').show();
+	      //gameLogic.clearBoard();
 	      store.gameInProgress = undefined;
 	    }
 	  }
@@ -119,6 +120,7 @@ webpackJsonp([0],[
 	  $('.forfeit').hide();
 	  $('.saveQuit').hide();
 	  $('#new-game-buttons').show();
+	  gameLogic.clearBoard();
 	  store.gameInProgress = undefined;
 	};
 
@@ -128,6 +130,7 @@ webpackJsonp([0],[
 	  $('.forfeit').hide();
 	  $('.saveQuit').hide();
 	  $('#new-game-buttons').show();
+	  gameLogic.clearBoard();
 	  store.gameInProgress = undefined;
 	};
 
@@ -146,7 +149,7 @@ webpackJsonp([0],[
 	  $('.new-game').on('click', onNewGame);
 	  $('.forfeit').on('click', onForfeit);
 	  $('.saveQuit').on('click', onSaveQuit);
-	  $('#load-hotseat').on('click', onLoadHotseat);
+	  $('#load-hotseat').on('submit', onLoadHotseat);
 	  $('#new-game-buttons').hide();
 	  $('.forfeit').hide();
 	  $('.saveQuit').hide();
@@ -599,10 +602,17 @@ webpackJsonp([0],[
 	  store.gameInProgress.game.over = !!winner;
 	};
 
+	var clearBoard = function clearBoard() {
+	  for (var i = 0; i < 9; i++) {
+	    $("#space" + i).attr('src', './assets/images/blankSpace.png');
+	  }
+	};
+
 	module.exports = {
 	  turn: turn,
 	  newGame: newGame,
-	  checkPastWins: checkPastWins
+	  checkPastWins: checkPastWins,
+	  clearBoard: clearBoard
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
