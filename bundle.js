@@ -112,6 +112,7 @@ webpackJsonp([0],[
 	        over: true
 	      }
 	    };
+	    console.log("working");
 	    event.preventDefault();
 	    api.updateGame(gamePatch).then(ui.updateGameSuccess).catch(ui.failure);
 	    gameLogic.winner = "player " + gameLogic.player + "forfeits";
