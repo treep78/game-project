@@ -70,6 +70,7 @@ const processTurn = function (event) {
       .catch(ui.failure);
     if(store.gameInProgress.game.over) {
       $('.forfeit').hide();
+      $('.saveQuit').hide();
       $('#new-game-buttons').show();
       store.gameInProgress = undefined;
     }

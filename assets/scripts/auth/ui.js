@@ -84,36 +84,32 @@ const getGameIdSuccess = function (data) {
   let gameId;
   let games = [0,0]; //played, won
   console.log(data);
+  store.sessionID = 0;
   for(let i in data.games) {
-    games[0]+=1;
-    if(store.user.email === data.games[i].player_x.email) {
+    games[0] += 1;
+    if(store.user.email === data.games[i].player_x.email && data.games[i].id > store.sessionID) {
       store.sessionID = data.games[i].id;
     }
-    if(data.games[i].over)
-    {
-      if(gameLogic.checkPastWins(data.games[i].cells) === "x")
-      {
+    if(data.games[i].over) {
+      if(gameLogic.checkPastWins(data.games[i].cells) === "x") {
         games[1] += 1;
       }
     }
   }
   $('#session-id-display').text("Session ID: "+store.sessionID);
-  $("#player-1-stats").text("Player: "+games[0]+"Won: "+games[1]);
+  $("#player-1-stats").text("Played: "+games[0]+" Won: "+games[1]);
 }
 
 const loadGameSuccess = function (data) {
-  if(!data.game.over)
-  {
+  if(!data.game.over) {
     store.sessionID = data.game.id;
     store.gameInProgress = data;
     $('#session-id-display').text("Session ID: "+store.sessionID);
     store.gameInProgress.game.cells = data.game.cells;
     gameLogic.winner = null;
     let xVO = 0;
-    for(let i in store.gameInProgress.game.cells)
-    {
-      if(store.gameInProgress.game.cells[i] !== "")
-      {
+    for(let i in store.gameInProgress.game.cells) {
+      if(store.gameInProgress.game.cells[i] !== "") {
         $('#space'+i).attr('src', "./assets/images/"+store.gameInProgress.game.cells[i]+".png");
         store.gameInProgress.game.cells[i] === "x" ? xVO += 1 : xVO -= 1;
       }

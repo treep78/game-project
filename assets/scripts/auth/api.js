@@ -35,8 +35,8 @@ const signOut = () =>
     },
   });
 
-const createGame = function (data) {
-  return $.ajax({
+const createGame = (data) =>
+  $.ajax({
   url: config.host+'/games',
   method: 'POST',
   headers: {
@@ -44,7 +44,6 @@ const createGame = function (data) {
   },
   data,
 });
-}
 
 const getGameId = function () {
   return $.ajax({
