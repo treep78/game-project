@@ -99,6 +99,7 @@ webpackJsonp([0],[
 	    api.updateGame(gamePatch).then(ui.updateGameSuccess).catch(ui.failure);
 	    if (store.gameInProgress.game.over) {
 	      $('.forfeit').hide();
+	      $('.saveQuit').hide();
 	      $('#new-game-buttons').show();
 	      store.gameInProgress = undefined;
 	    }
@@ -106,19 +107,26 @@ webpackJsonp([0],[
 	};
 
 	var onForfeit = function onForfeit(event) {
-	  if ($('.forfeit').textContent == "Forfeit") {
-	    var gamePatch = {
-	      game: {
-	        over: true
-	      }
-	    };
-	    console.log("working");
-	    event.preventDefault();
-	    api.updateGame(gamePatch).then(ui.updateGameSuccess).catch(ui.failure);
-	    gameLogic.winner = "player " + gameLogic.player + "forfeits";
-	  }
+	  var gamePatch = {
+	    game: {
+	      over: true
+	    }
+	  };
+	  event.preventDefault();
+	  api.updateGame(gamePatch).then(ui.updateGameSuccess).catch(ui.failure);
+	  gameLogic.winner = "player " + gameLogic.player + "forfeits";
 
 	  $('.forfeit').hide();
+	  $('.saveQuit').hide();
+	  $('#new-game-buttons').show();
+	  store.gameInProgress = undefined;
+	};
+
+	var onSaveQuit = function onSaveQuit(event) {
+	  event.preventDefault();
+
+	  $('.forfeit').hide();
+	  $('.saveQuit').hide();
 	  $('#new-game-buttons').show();
 	  store.gameInProgress = undefined;
 	};
@@ -137,9 +145,11 @@ webpackJsonp([0],[
 	  $('.grid-space').on('click', processTurn);
 	  $('.new-game').on('click', onNewGame);
 	  $('.forfeit').on('click', onForfeit);
+	  $('.saveQuit').on('click', onSaveQuit);
 	  $('#load-hotseat').on('click', onLoadHotseat);
 	  $('#new-game-buttons').hide();
 	  $('.forfeit').hide();
+	  $('.saveQuit').hide();
 	};
 
 	module.exports = {
@@ -216,7 +226,7 @@ webpackJsonp([0],[
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var config = __webpack_require__(6);
 	var store = __webpack_require__(7);
@@ -393,7 +403,7 @@ webpackJsonp([0],[
 	      }
 	    }
 	  }
-	  $("#player-1-stats").text("Player: " + games[0] + "Won: " + games[1]);
+	  $("#player-1-stats").text("Played: " + games[0] + " Won: " + games[1]);
 	};
 
 	var updateGameSuccess = function updateGameSuccess(data) {};
@@ -401,6 +411,7 @@ webpackJsonp([0],[
 	var createGameSuccess = function createGameSuccess(data) {
 	  $('#new-game-buttons').hide();
 	  $('.forfeit').show();
+	  $('.saveQuit').show();
 	  $('#winner-text').text("");
 	};
 
@@ -408,9 +419,10 @@ webpackJsonp([0],[
 	  var gameId = void 0;
 	  var games = [0, 0]; //played, won
 	  console.log(data);
+	  store.sessionID = 0;
 	  for (var i in data.games) {
 	    games[0] += 1;
-	    if (store.user.email === data.games[i].player_x.email) {
+	    if (store.user.email === data.games[i].player_x.email && data.games[i].id > store.sessionID) {
 	      store.sessionID = data.games[i].id;
 	    }
 	    if (data.games[i].over) {
@@ -420,7 +432,7 @@ webpackJsonp([0],[
 	    }
 	  }
 	  $('#session-id-display').text("Session ID: " + store.sessionID);
-	  $("#player-1-stats").text("Player: " + games[0] + "Won: " + games[1]);
+	  $("#player-1-stats").text("Played: " + games[0] + " Won: " + games[1]);
 	};
 
 	var loadGameSuccess = function loadGameSuccess(data) {
