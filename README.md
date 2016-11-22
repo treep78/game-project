@@ -19,10 +19,8 @@ I started by planning out the different files I would need and how they would be
 6. game logic backend communication
 7. clean-up
 
-Unsolved issues:
+Future Improvements:
 I have a few occasional issues with ajax's asyncronous functions that I would like to resolve if I had the time. I would also like to have spent more time on my aps' appearence. Multiplayer would have been interesting to implement, but I simply didn't feel I had the time.
-
-User stories:
 
 User Stories:
 
