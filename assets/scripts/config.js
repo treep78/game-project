@@ -2,7 +2,7 @@
 
 const config =
 {
-    host: 'https://still-refuge-29589.herokuapp.com'
+    host: 'https://whispering-inlet-88582.herokuapp.com'
 };
 
 module.exports = config;
