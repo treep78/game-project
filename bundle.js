@@ -332,7 +332,7 @@ webpackJsonp([0],[
 	'use strict';
 
 	var config = {
-	    host: 'https://aqueous-atoll-85096.herokuapp.com'
+	    host: 'https://whispering-inlet-88582.herokuapp.com'
 	};
 
 	module.exports = config;
